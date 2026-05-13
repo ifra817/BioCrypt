@@ -17,7 +17,7 @@ def register_new_face():
         draw_faces(frame, face_locations)
 
         # Show video
-#        cv2.imshow("Register Face", frame)
+        # cv2.imshow("Register Face", frame)
 
         if face_locations and embeddings is None:
             if stable_start is None:
