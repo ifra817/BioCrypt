@@ -1,8 +1,8 @@
 .env
 venv
 env/
-data/AttendanceDB
-*.db
+#data/AttendanceDB
+#*.db
 
 \__pycache__
 .vscode/
