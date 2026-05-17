@@ -30,10 +30,11 @@ def draw_faces(frame, face_locations):
         cv2.rectangle(frame, (left, top), (right, bottom), (255, 255, 0), 2)
     cv2.imshow("Face Detection", frame)
 
-
 def generate_face_embeddings(frame, face_locations):
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    face_embeddings = face_recognition.face_encodings(rgb_frame, face_locations)
+    # Adding num_jitters=3 forces the engine to recalculate the face 3 times 
+    # to capture highly specific micro-details (crucial for telling siblings apart)
+    face_embeddings = face_recognition.face_encodings(rgb_frame, face_locations, num_jitters=3)
     return face_embeddings
 
 def release_camera(capture):

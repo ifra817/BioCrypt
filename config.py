@@ -1,5 +1,9 @@
 import os
 from cryptography.fernet import Fernet
+from dotenv import load_dotenv
+
+# Force load variables from the .env file into os.environ
+load_dotenv()
 
 # Database configuration
 DATABASE_PATH = 'data/AttendanceDB'
@@ -7,11 +11,11 @@ DATABASE_PATH = 'data/AttendanceDB'
 # Recognition threshold
 RECOGNITION_THRESHOLD = 0.6
 
-# Encryption key - generate once and store here
-# If not set, generate new one (but for persistence, set it manually or load from .env)
-ENCRYPTION_KEY = os.getenv('ENCRYPTION_KEY', Fernet.generate_key().decode())
+# Now os.getenv will successfully see the saved key from your .env file!
+ENCRYPTION_KEY = os.getenv('ENCRYPTION_KEY')
 
-# Save to .env if not exists
-if not os.path.exists('.env'):
+# Fallback block if .env didn't exist yet
+if not ENCRYPTION_KEY:
+    ENCRYPTION_KEY = Fernet.generate_key().decode()
     with open('.env', 'w') as f:
         f.write(f'ENCRYPTION_KEY={ENCRYPTION_KEY}\n')
