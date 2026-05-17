@@ -6,3 +6,5 @@ data/AttendanceDB
 
 \__pycache__
 .vscode/
+
+biocrypt_attendance.csv
